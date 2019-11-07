@@ -5,7 +5,7 @@ var router = express.Router();
 router.get("/", function(req, res, next) {
   res.render("index", { title: "Express" });
 });
-router.get("/deployhook", function(req, res) {
+router.post("/deployhook", function(req, res) {
   console.log(req.query.secret);
   if (req.query.secret === process.env.SECRET) {
     console.log(`they match`);
