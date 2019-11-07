@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 router.get('/deployhook', function(req, res){
   var {exec} = require('child_process');
-  exec('git pull; refresh', function(error, stdout, stderr) {
+  exec('git pull ; git merge $(git rev-parse --abbrev-ref HEAD); refresh', function(error, stdout, stderr) {
     if (error) {
       console.error(`exec error: ${error}`);
       return res.sendStatus(500);
