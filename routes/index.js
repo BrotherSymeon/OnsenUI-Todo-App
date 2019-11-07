@@ -6,7 +6,7 @@ router.get("/", function(req, res, next) {
   res.render("index", { title: "Express" });
 });
 router.post("/deployhook", function(req, res) {
-  console.log(req.query.secret);
+  console.log(req.body);
   if (req.query.secret === process.env.SECRET) {
     console.log(`they match`);
     var { exec } = require("child_process");
