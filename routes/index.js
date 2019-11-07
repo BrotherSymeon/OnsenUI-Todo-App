@@ -8,7 +8,7 @@ router.get("/", function(req, res, next) {
 router.post("/deployhook", function(req, res) {
   console.log(req.body);
   if (req.query.secret === process.env.SECRET) {
-    console.log(`they match`);
+    console.log(`they match yah`);
     var { exec } = require("child_process");
     exec(
       "git pull ; git merge $(git rev-parse --abbrev-ref HEAD) ; refresh",
