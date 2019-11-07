@@ -10,11 +10,11 @@ router.get('/deployhook', function(req, res){
   exec('git pull; refresh', function(error, stdout, stderr) {
     if (error) {
       console.error(`exec error: ${error}`);
-      return res.send(500);
+      return res.sendStatus(500);
     }
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
-    res.send(200);
+    res.sendStatus(200);
   });
 });
 
