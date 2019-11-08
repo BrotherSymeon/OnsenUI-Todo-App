@@ -52,8 +52,21 @@ function verifyGithubPayload(req, res, next){
 }
 
 function eventsHandler(req, res){
-  console.log(req.event_type, req.action, req.payload);
-  return res.send('got authentic event data through my new middleware!');
+  console.log(`${req.event_type} event recieved`);
+    var { exec } = require("child_process");
+    exec(
+      "git pull ; git merge $(git rev-parse --abbrev-ref HEAD) ; refresh",
+      function(error, stdout, stderr) {
+        if (error) {
+          console.error(`exec error: ${error}`);
+          return res.sendStatus(500);
+        }
+        console.log(`stdout: ${stdout}`);
+        console.error(`stderr: ${stderr}`);
+        res.sendStatus(200);
+      }
+    );
+  return res.sendStatus(200);
 };
 
 module.exports = app;
