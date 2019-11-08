@@ -59,14 +59,14 @@ function eventsHandler(req, res){
       function(error, stdout, stderr) {
         if (error) {
           console.error(`exec error: ${error}`);
-          return res.sendStatus(500);
+          return res.status(500);
         }
         console.log(`stdout: ${stdout}`);
-        console.error(`stderr: ${stderr}`);
-        res.sendStatus(200);
+        
+        res.status(200).send('merge succeeded');
       }
     );
-  return res.sendStatus(200);
+  return res.status(200);
 };
 
 module.exports = app;
