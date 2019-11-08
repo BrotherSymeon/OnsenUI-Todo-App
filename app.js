@@ -63,10 +63,10 @@ function eventsHandler(req, res){
         }
         console.log(`stdout: ${stdout}`);
         console.error(`stderr: ${stderr}`);
-        res.sendStatus(200);
+        return res.status(200);
       }
     );
-  return res.sendStatus(200);
+  return res.status(200);
 };
 
 module.exports = app;
