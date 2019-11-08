@@ -1,12 +1,15 @@
 var express = require("express");
 var router = express.Router();
+var cypto = require("crypto");
+
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.render("index", { title: "Expressv" });
 });
 router.post("/deployhook", function(req, res) {
-  console.log(req.header('X-Hub-Signature'));
+  let sig = "sha1=" + crypto.createHmac('sha1', process.env.SECRET).update(chunk.toString()).digest('hex');
+
   if (req.query.secret === process.env.SECRET) {
     console.log(`they match yah`);
     var { exec } = require("child_process");
@@ -27,5 +30,13 @@ router.post("/deployhook", function(req, res) {
     return res.sendStatus(500);
   }
 });
+
+
+const createComparisonSignature = function(body) {
+  const hmac = crypto.createHmac('sha1', process.env.O);
+  const self_signature = hmac.update(JSON.stringify(body)).digest('hex');
+  return `sha1=${self_signature}`; // shape in GitHub header
+}
+
 
 module.exports = router;
