@@ -66,7 +66,7 @@ function eventsHandler(req, res){
         res.sendStatus(200);
       }
     );
-  return res.sendStatus('got authentic event data through my new middleware!');
+  return res.sendStatus(200);
 };
 
 module.exports = app;
